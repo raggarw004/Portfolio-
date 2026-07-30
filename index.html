@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ritvik Aggarwal — AI/ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0A0E14;
+    --surface: #12151C;
+    --surface-2: #171B24;
+    --line: #262B36;
+    --text: #E8E6E0;
+    --text-dim: #9AA0AC;
+    --signal: #5EEAD4;
+    --signal-dim: rgba(94,234,212,0.14);
+    --amber: #F5A623;
+    --radius: 8px;
+    --maxw: 1120px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  h1,h2,h3{
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .mono{ font-family: 'JetBrains Mono', monospace; }
+
+  a{ color: inherit; }
+
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(10,14,20,0.72);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .brand{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--signal);
+  }
+  .brand span{ color: var(--text-dim); }
+  .navlinks{
+    display:flex;
+    gap: 28px;
+    list-style:none;
+    margin:0; padding:0;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  .navlinks a{
+    text-decoration:none;
+    color: var(--text-dim);
+    transition: color .15s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{ color: var(--text); }
+  .navlinks a::before{ content: "./"; color: var(--line); }
+
+  @media (max-width: 720px){
+    .navlinks{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position: relative;
+    min-height: 100vh;
+    display:flex;
+    align-items:center;
+    overflow: hidden;
+    padding-top: 64px;
+  }
+  #network{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    opacity: 0.55;
+  }
+  .hero .wrap{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--signal);
+    margin-bottom: 18px;
+    display:flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 7px; height: 7px;
+    background: var(--signal);
+    border-radius: 50%;
+    box-shadow: 0 0 12px 2px var(--signal);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size: clamp(40px, 7vw, 84px);
+    font-weight: 700;
+    line-height: 1.02;
+    max-width: 14ch;
+  }
+  .hero .role{
+    font-size: clamp(18px, 2.4vw, 24px);
+    color: var(--text-dim);
+    margin-top: 18px;
+    max-width: 46ch;
+    font-weight: 400;
+  }
+  .hero .role em{
+    font-style: normal;
+    color: var(--text);
+    border-bottom: 1px solid var(--signal-dim);
+  }
+  .hero-cta{
+    margin-top: 40px;
+    display:flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+    padding: 13px 22px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    transition: all .18s ease;
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+  }
+  .btn-primary{
+    background: var(--signal);
+    color: var(--ink);
+    border-color: var(--signal);
+    font-weight: 600;
+  }
+  .btn-primary:hover{ box-shadow: 0 0 0 4px var(--signal-dim); }
+  .btn-ghost{ color: var(--text); }
+  .btn-ghost:hover{ border-color: var(--signal); color: var(--signal); }
+
+  .scroll-cue{
+    position:absolute;
+    bottom: 34px; left: 32px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .scroll-cue .bar{
+    width: 1px; height: 26px;
+    background: linear-gradient(var(--signal), transparent);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:.3} 50%{opacity:1} }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding: 120px 0; border-bottom: 1px solid var(--line); }
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom: 56px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .sec-label{
+    font-family:'JetBrains Mono', monospace;
+    color: var(--signal);
+    font-size: 13px;
+  }
+  .sec-head h2{
+    font-size: clamp(28px, 3.4vw, 40px);
+    margin-top: 6px;
+  }
+  .sec-meta{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: right;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 64px;
+  }
+  .about-grid p{ color: var(--text-dim); font-size: 16px; max-width: 60ch; }
+  .about-grid p + p{ margin-top: 16px; }
+  .stack-list{
+    display:flex;
+    flex-direction:column;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .stack-row{
+    display:flex;
+    justify-content:space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  .stack-row .k{ color: var(--text-dim); }
+  .stack-row .v{ color: var(--text); text-align:right; }
+
+  @media (max-width: 860px){
+    .about-grid{ grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ---------- WORK ---------- */
+  .work-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .card:hover{
+    border-color: var(--signal);
+    transform: translateY(-3px);
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0; height: 2px;
+    background: linear-gradient(90deg, var(--signal), transparent);
+    opacity: 0;
+    transition: opacity .2s ease;
+  }
+  .card:hover::before{ opacity: 1; }
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom: 18px;
+  }
+  .card h3{ font-size: 20px; }
+  .card-idx{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .card p{ color: var(--text-dim); font-size: 14.5px; margin: 10px 0 20px; }
+  .tags{ display:flex; gap: 8px; flex-wrap:wrap; }
+  .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 4px 9px;
+    border-radius: 4px;
+    background: var(--surface-2);
+    color: var(--signal);
+    border: 1px solid var(--line);
+  }
+  .card-link{
+    margin-top: 20px;
+    display:inline-flex;
+    gap: 6px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--text-dim);
+    text-decoration:none;
+  }
+  .card-link:hover{ color: var(--signal); }
+
+  @media (max-width: 860px){
+    .work-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- COURSEWORK ---------- */
+  .course-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .course-card{
+    background: none;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: border-color .2s ease;
+  }
+  .course-card:hover{ border-color: var(--amber); }
+  .course-tag{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin-bottom: 16px;
+  }
+  .course-card h3{ font-size: 19px; margin-bottom: 4px; }
+  .course-card .course-meta{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+  .course-card p{ color: var(--text-dim); font-size: 14.5px; margin: 0 0 18px; }
+  .course-link{
+    display:inline-flex;
+    gap: 6px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--text-dim);
+    text-decoration:none;
+  }
+  .course-link:hover{ color: var(--amber); }
+
+  @media (max-width: 860px){
+    .course-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .skill-block{
+    background: var(--surface);
+    padding: 26px;
+  }
+  .skill-block h4{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--amber);
+    margin-bottom: 14px;
+    text-transform: lowercase;
+  }
+  .skill-block ul{ list-style:none; margin:0; padding:0; }
+  .skill-block li{
+    font-size: 14px;
+    color: var(--text-dim);
+    padding: 5px 0;
+  }
+  .skill-block li::before{ content: "— "; color: var(--line); }
+
+  @media (max-width: 860px){
+    .skills-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- EXPERIENCE (log style) ---------- */
+  .log{
+    border-top: 1px solid var(--line);
+  }
+  .log-row{
+    display:grid;
+    grid-template-columns: 140px 1fr;
+    gap: 32px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .log-time{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--text-dim);
+    padding-top: 3px;
+  }
+  .log-time .live{ color: var(--signal); }
+  .log-body h3{ font-size: 17px; margin-bottom: 4px; }
+  .log-body .org{ color: var(--text-dim); font-size: 14px; margin-bottom: 10px; }
+  .log-body p{ color: var(--text-dim); font-size: 14.5px; max-width: 64ch; }
+
+  @media (max-width: 640px){
+    .log-row{ grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{ border-bottom: none; }
+  .contact-inner{
+    display:flex;
+    flex-direction: column;
+    align-items:flex-start;
+  }
+  .contact h2{
+    font-size: clamp(32px, 6vw, 64px);
+    max-width: 16ch;
+  }
+  .big-email{
+    margin-top: 28px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: clamp(16px, 2.6vw, 22px);
+    color: var(--signal);
+    text-decoration:none;
+    border-bottom: 1px solid transparent;
+  }
+  .big-email:hover{ border-color: var(--signal); }
+  .social-row{
+    margin-top: 40px;
+    display:flex;
+    gap: 24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  .social-row a{ color: var(--text-dim); text-decoration:none; }
+  .social-row a:hover{ color: var(--text); }
+  footer{
+    padding: 28px 0 60px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-dim);
+    display:flex;
+    justify-content:space-between;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .scroll-cue .bar{ animation:none; }
+    #network{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">~/<span>ritvik-aggarwal</span></div>
+    <ul class="navlinks">
+      <li><a href="#about">about</a></li>
+      <li><a href="#work">work</a></li>
+      <li><a href="#coursework">coursework</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#experience">log</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <canvas id="network"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">open to internships &amp; new grad roles</div>
+    <h1>Ritvik Aggarwal.</h1>
+    <p class="role">I build <em>ML systems</em> that ship RAG pipelines, trading models, and LLM tools that leave the notebook and end up in someone's inbox, Discord, or dashboard.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#work">view work →</a>
+      <a class="btn btn-ghost" href="#contact">get in touch</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="bar"></span>scroll</div>
+</header>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label">&gt;&gt;&gt; about</div>
+        <h2>How I think about ML.</h2>
+      </div>
+      <div class="sec-meta">based in New York, NY<br>open to remote / relocation</div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a junior at Indiana University's Luddy School, studying Informatics with a minor in Business and Entrepreneurship. I like taking machine learning past the notebook into FastAPI backends, Discord bots, and tools people actually open every day.</p>
+        <p>Currently building an Outlook add in at EXL that turns a flooded inbox into a prioritized, due dated task list using Microsoft Graph and Mistral AI. Before that: grounding enterprise Q&amp;A in a RAG pipeline at Deloitte, shipping 25 ML projects at School of AI, and evaluating AI model outputs for Handshake.</p>
+      </div>
+      <div>
+        <div class="stack-list">
+          <div class="stack-row"><span class="k">focus</span><span class="v">RAG &amp; LLM tooling, applied ML</span></div>
+          <div class="stack-row"><span class="k">languages</span><span class="v">Python, SQL, Java</span></div>
+          <div class="stack-row"><span class="k">frameworks</span><span class="v">PyTorch, TensorFlow, LangChain</span></div>
+          <div class="stack-row"><span class="k">infra</span><span class="v">AWS, Azure OpenAI, Docker, Git</span></div>
+          <div class="stack-row"><span class="k">education</span><span class="v">B.S. Computer Science/Informatics, Indiana University, 2027</span></div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label">&gt;&gt;&gt; work</div>
+        <h2>What I've been Building.</h2>
+      </div>
+      <div class="sec-meta">Projects[:4]</div>
+    </div>
+    <div class="work-grid">
+
+      <div class="card" id="proj-nas">
+        <div class="card-top"><h3>Evolutionary Neural Architecture Search</h3><span class="card-idx">01</span></div>
+        <p>A from scratch NAS system that evolves CNN architectures on FashionMNIST instead of hand tuning them. A genetic algorithm mutates and crosses over depth, channel widths, kernel sizes, batch norm, dropout, and hidden size across generations, scoring each candidate on validation accuracy with a parameter count penalty to favor efficient networks over just the biggest ones.</p>
+        <div class="tags"><span class="tag">pytorch</span><span class="tag">nas</span><span class="tag">genetic-algorithm</span></div>
+      </div>
+
+      <div class="card" id="proj-behavior">
+        <div class="card-top"><h3>Behavior Sequence Lab</h3><span class="card-idx">02</span></div>
+        <p>A real-time FastAPI service that classifies user interaction state — focused, tired, confused, or expert — from mouse and typing telemetry. A bidirectional LSTM with attention pooling scores each session, and an HMM-style transition layer smooths predictions across time so the model doesn't flicker between states on noisy single readings.</p>
+        <div class="tags"><span class="tag">pytorch</span><span class="tag">bilstm</span><span class="tag">fastapi</span></div>
+        <a class="card-link" href="https://behavior-sequence-lab.onrender.com">live demo →</a>
+      </div> 
+
+      <div class="card" id="proj-marl">
+        <div class="card-top"><h3>Cooperative Multi-Agent PPO</h3><span class="card-idx">03</span></div>
+        <p>A shared policy PPO implementation where multiple agents learn to cooperatively cover targets on a grid, trained from scratch with generalized advantage estimation and PPO's clipped objective. Reward shaping balances individual contribution against team success, with a collision penalty that pushes agents toward implicit coordination rather than just racing each other to targets.</p>
+        <div class="tags"><span class="tag">pytorch</span><span class="tag">ppo</span><span class="tag">multi-agent-rl</span></div>
+      </div>
+
+      <div class="card" id="proj-trading">
+        <div class="card-top"><h3>AI Trading Signal Model</h3><span class="card-idx">04</span></div>
+        <p>An LSTM-Transformer ensemble in PyTorch that fuses bidirectional LSTM and positional-encoded Transformer outputs to predict returns. Backtested out-of-sample with configurable transaction costs, tracking Sharpe ratio, drawdown, hit rate, and a confusion matrix.</p>
+        <div class="tags"><span class="tag">pytorch</span><span class="tag">lstm</span><span class="tag">transformer</span></div>
+        <a class="card-link" href="https://ai-trading-simulator-7dle.onrender.com">live demo →</a> 
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= COURSEWORK ================= -->
+<section id="coursework">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label">&gt;&gt;&gt; coursework</div>
+        <h2>Academic projects.</h2>
+      </div>
+      <div class="sec-meta">Projects[:2]</div>
+    </div>
+    <div class="course-grid">
+
+      <div class="course-card">
+        <span class="course-tag">class project</span>
+        <h3>Camp Quest</h3>
+        <div class="course-meta">I308 Information Systems — Indiana University · team of 4</div>
+        <p>A full stack PHP/MySQL web app that helps parents find kids' camps by category, age, location, price, and availability, with a vendor side flow to list new camps. Designed the relational schema vendor, parent, child, registration, reviews, interests and wrote the querying logic behind it: joins across camps/contacts, aggregates like average price by category, and date range filtering for camps starting soon.</p>
+        <div class="tags"><span class="tag">mysql</span><span class="tag">php</span><span class="tag">bootstrap</span></div>
+        <br>
+      </div>
+
+      <div class="course-card">
+        <span class="course-tag">class project</span>
+        <h3>Theme Park Decision Support Tool</h3>
+        <div class="course-meta">Business Analytics — Indiana University · team of 4</div>
+        <p>An Excel based decision support tool built to answer a real business question: should a theme park run an ad campaign pushing sports drinks over fountain drinks? Explored 4 years of historical beverage sales to surface seasonal and behavioral patterns, then ran a Monte Carlo simulation across 1,000 scenarios modeling cannibalization risk and revenue impact recommending the campaign based on a projected average profit lift and lower revenue volatility.</p>
+        <div class="tags"><span class="tag">excel</span><span class="tag">monte-carlo</span><span class="tag">decision-analysis</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= EXPERIENCE LOG ================= -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label">&gt;&gt;&gt; log</div>
+        <h2>Experience.</h2>
+      </div>
+    </div>
+    <div class="log">
+      <div class="log-row" id="exp-exl">
+        <div class="log-time"><span class="live">now</span> — Jun 2026</div>
+        <div class="log-body">
+          <h3>Analytics and AI Solutions Intern</h3>
+          <div class="org">EXL — New York, NY</div>
+          <p>Building an Outlook add-in with Microsoft Entra ID auth, pulling and filtering inboxes through Microsoft Graph, and connecting LangChain to Mistral AI to turn emails into a live task tracker.</p>
+        </div>
+      </div>
+      <div class="log-row" id="exp-handshake">
+        <div class="log-time">now — Dec 2025</div>
+        <div class="log-body">
+          <h3>AI Trainee</h3>
+          <div class="org">Handshake — Bloomington, IN</div>
+          <p>Evaluating AI generated responses for tone, personality, and formatting, and documenting judgments with exact quotes to explain what worked and why.</p>
+        </div>
+      </div>
+      <div class="log-row" id="exp-schoolofai">
+        <div class="log-time">Apr 2026 — Dec 2025</div>
+        <div class="log-body">
+          <h3>Machine Learning Intern</h3>
+          <div class="org">School of AI — Bloomington, IN</div>
+          <p>Built an end to end churn prediction pipeline, automated F1 / precision recall evaluation across 3 ML pipelines, and handled severe class imbalance in a fraud detection model, 25 ML projects shipped in total.</p>
+        </div>
+      </div>
+      <div class="log-row" id="exp-deloitte">
+        <div class="log-time">Aug — May 2025</div>
+        <div class="log-body">
+          <h3>Gen AI Intern</h3>
+          <div class="org">Deloitte — Gurugram, India</div>
+          <p>Built the backend pipeline that parses uploaded documents, chunks and embeds text into a vector database, and retrieves the closest matches to ground AI answers.</p>
+        </div>
+      </div>
+      <div class="log-row" id="exp-edu">
+        <div class="log-time">2027 — 2023</div>
+        <div class="log-body">
+          <h3>B.S. Informatics, Minor in Business &amp; Entrepreneurship</h3>
+          <div class="org">Indiana University, Luddy School — GPA 3.85/4.00</div>
+          <p>Dean's List; Alpha Lambda Delta and National Society of Collegiate Scholars; Luddy Academic Integrity Council; two-time national swimming championship competitor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="contact">
+  <div class="wrap contact-inner">
+    <div class="sec-label">&gt;&gt;&gt; contact</div>
+    <h2>Let's build something that actually ships.</h2>
+    <a class="big-email" href="mailto:raggarw@iu.edu">raggarw@iu.edu</a>
+    <div class="social-row">
+      <a href="https://github.com/raggarw004">GitHub</a>
+      <a href="https://www.linkedin.com/in/ritvikaggarwal/">LinkedIn</a>
+      <a href="Ritvik_Aggarwal_Resume.pdf">Resume</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© <span id="year"></span> Ritvik Aggarwal</span>
+    <span>built with intent, not a template</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------- Embedding-space network animation ----------
+  (function(){
+    const canvas = document.getElementById('network');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotion) return;
+
+    let w, h, nodes = [];
+    const NODE_COUNT_DENSITY = 9000; // px^2 per node
+    const LINK_DIST = 130;
+    const mouse = { x: -9999, y: -9999 };
+
+    function resize(){
+      w = canvas.width = canvas.offsetWidth * devicePixelRatio;
+      h = canvas.height = canvas.offsetHeight * devicePixelRatio;
+      const count = Math.floor((canvas.offsetWidth * canvas.offsetHeight) / NODE_COUNT_DENSITY);
+      nodes = Array.from({length: count}, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.25 * devicePixelRatio,
+        vy: (Math.random() - 0.5) * 0.25 * devicePixelRatio,
+        r: (Math.random() * 1.4 + 0.6) * devicePixelRatio
+      }));
+    }
+
+    function step(){
+      ctx.clearRect(0, 0, w, h);
+      const linkDistPx = LINK_DIST * devicePixelRatio;
+
+      for(const n of nodes){
+        n.x += n.vx; n.y += n.vy;
+        if(n.x < 0 || n.x > w) n.vx *= -1;
+        if(n.y < 0 || n.y > h) n.vy *= -1;
+      }
+
+      for(let i = 0; i < nodes.length; i++){
+        for(let j = i + 1; j < nodes.length; j++){
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if(dist < linkDistPx){
+            const alpha = (1 - dist / linkDistPx) * 0.5;
+            ctx.strokeStyle = `rgba(94,234,212,${alpha})`;
+            ctx.lineWidth = 0.6 * devicePixelRatio;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+        // link to cursor for a "live activation" feel
+        const dxm = a_or(nodes[i].x, mouse.x), dym = a_or(nodes[i].y, mouse.y);
+      }
+
+      // cursor glow links
+      for(const n of nodes){
+        const dx = n.x - mouse.x, dy = n.y - mouse.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        const glowDist = 180 * devicePixelRatio;
+        if(dist < glowDist){
+          const alpha = (1 - dist / glowDist) * 0.9;
+          ctx.strokeStyle = `rgba(245,166,35,${alpha})`;
+          ctx.lineWidth = 0.7 * devicePixelRatio;
+          ctx.beginPath();
+          ctx.moveTo(n.x, n.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+
+      for(const n of nodes){
+        ctx.fillStyle = 'rgba(232,230,224,0.85)';
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function a_or(v, m){ return v; } // no-op helper kept for clarity/perf
+
+    window.addEventListener('resize', resize);
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = (e.clientX - rect.left) * devicePixelRatio;
+      mouse.y = (e.clientY - rect.top) * devicePixelRatio;
+    });
+    canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+    resize();
+    step();
+  })();
+</script>
+
+</body>
+</html>

@@ -273,6 +273,15 @@
   }
   @keyframes pulse{ 0%,100%{opacity:.3} 50%{opacity:1} }
 
+  .subheading{
+        grid-column: 1 / -1;
+        font-size: clamp(30px, 3.8vw, 46px);
+        font-style: italic;
+        font-weight: 500;
+        color: var(--ink);
+        margin: 98px 0 -6px;
+      }
+
   /* ---------- ABOUT ---------- */
   section#about{ background: var(--bg); }
   .about-grid{
@@ -561,7 +570,7 @@
         <div class="sec-label">&gt;&gt;&gt; about</div>
         <h2>A bit about me.</h2>
       </div>
-      <div class="sec-meta">based in New York, NY<br>open to remote / relocation</div>
+      <div class="sec-meta">based in Bloomington, IN<br>open to remote / relocation</div>
     </div>
     <div class="about-grid">
       <div>
@@ -641,7 +650,37 @@
         <span class="project-tag">academic project</span>
         <div class="card-top"><h3>Theme Park Decision Support Tool</h3><span class="card-idx">06</span></div>
         <p>For a business analytics class, my team got handed a business question that actually sounded real: should a theme park push sports drinks over fountain drinks in its ads? Instead of just guessing, we built an Excel tool that ran a Monte Carlo simulation basically a thousand simulated versions of the future to see how that decision would actually play out. We ended up recommending the campaign because the numbers backed it up, not because it sounded like a good idea, which taught me a lot about how far you can trust a spreadsheet if you set it up right.</p>
-        <div class="tags"><span class="tag">excel</span><span class="tag">monte-carlo</span><span class="tag">decision-analysis</span></div>
+        <div class="tags"><span class="tag">excel</span><span class="tag">monte carlo</span><span class="tag">decision analysis</span></div>
+      </div>
+
+
+      <h3 class="subheading">Stepping into other roles.</h3>
+
+      <div class="card" id="proj-citi">
+        <img class="card-banner" src="Screenshot 2026-08-10 at 11.17.51 PM.png" alt="Citi Forage Job Simulation">
+        <span class="project-tag">job simulation</span>
+        <div class="card-top"><h3>Citi — Forage Job Simulation</h3><span class="card-idx">07</span></div>
+        <p>I'd never really looked inside how a bank like Citi manages risk day to day, so I did this mostly out of curiosity about that world. I played a hypothetical analyst working on their loan system sketched out the whole loan process as a diagram, dug into whether machine learning could realistically help flag risky credit, and built a small tool that shows stock market risk changing live. It wasn't really about writing perfect code, it was more about learning to think in the structured, careful way finance actually requires.</p>
+        <div class="tags"><span class="tag">uml</span><span class="tag">java</span><span class="tag">risk analysis</span></div>
+        <a class="card-link" href="citi.pdf">view certificate →</a>
+      </div>
+
+      <div class="card" id="proj-yc">
+        <img class="card-banner" src="Screenshot 2026-08-10 at 11.19.16 PM.png" alt="Y Combinator Forage Job Simulation">
+        <span class="project-tag">job simulation</span>
+        <div class="card-top"><h3>Y Combinator — Forage Job Simulation</h3><span class="card-idx">08</span></div>
+        <p>I've always been curious what it's actually like to build product at a startup instead of just writing code for one. This put me in a PM ish seat at a YC backed logistics company. I built a task board people could drag things around on, made sure nothing got lost between sessions on the backend, then switched hats entirely and dug into usage data to figure out what people actually needed next. Good reminder that the hardest part of building something isn't always the code it's knowing what's actually worth building.</p>
+        <div class="tags"><span class="tag">node.js</span><span class="tag">sql</span><span class="tag">product thinking</span></div>
+        <a class="card-link" href="y.pdf">view certificate →</a>
+      </div>
+
+      <div class="card" id="proj-skyscanner">
+        <img class="card-banner" src="Screenshot 2026-08-10 at 11.16.05 PM.png" alt="Skyscanner Forage Job Simulation">
+        <span class="project-tag">job simulation</span>
+        <div class="card-top"><h3>Skyscanner — Forage Job Simulation</h3><span class="card-idx">09</span></div>
+        <p>This one appealed to me because it let me touch both ends of a real product at once, instead of staying in just one lane. I built a small backend service to help people find car rentals and hotels, then switched over to building the mobile side an app showing someone's flight itinerary using Skyscanner's own design system. Jumping between backend and mobile in the same project was honestly the most fun part most of what I build stays on one side of that line.</p>
+        <div class="tags"><span class="tag">dropwizard</span><span class="tag">android</span><span class="tag">microservices</span></div>
+        <a class="card-link" href="sky.pdf">view certificate →</a>
       </div>
 
     </div>

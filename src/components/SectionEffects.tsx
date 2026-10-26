@@ -1,0 +1,7 @@
+import {useEffect,useRef,type CSSProperties} from 'react';
+export function SectionEffects({index}:{index:number}){
+ const ref=useRef<HTMLDivElement>(null);
+ useEffect(()=>{const el=ref.current;if(!el)return;const observer=new IntersectionObserver(([entry])=>el.classList.toggle('is-visible',entry.isIntersecting),{rootMargin:'100px'});observer.observe(el);return()=>observer.disconnect()},[]);
+ return <div ref={ref} className="section-effects" style={{'--effect-angle':`${index*37}deg`,'--effect-delay':`${index*-.8}s`} as CSSProperties} aria-hidden="true"><div className="effect-grid"/><div className="effect-spotlight"/><div className="effect-morph"/><div className="effect-wireframe">{Array.from({length:6},(_,i)=><i key={i} style={{transform:`rotateY(${i*30}deg)`}}/>)}</div><div className="effect-glass glass-one"/><div className="effect-glass glass-two"/><svg className="effect-lines" viewBox="0 0 1200 700" preserveAspectRatio="none"><path d="M0 520 Q260 520 390 290 T800 240 T1200 80"/><path d="M0 570 Q310 570 440 340 T850 290 T1200 130"/><circle r="4"><animateMotion dur="14s" repeatCount="indefinite" path="M0 520 Q260 520 390 290 T800 240 T1200 80"/></circle></svg></div>
+}
+export function SplitText({text}:{text:string}){return <span className="split-text" aria-label={text}>{text.split(' ').map((word,i)=><span className="split-word" key={`${word}-${i}`} aria-hidden="true"><span style={{'--word-index':i} as CSSProperties}>{word}</span>{' '}</span>)}</span>}
